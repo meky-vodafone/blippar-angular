@@ -1,0 +1,90 @@
+<app-game-header></app-game-header>
+
+
+<a-scene
+  id="mainScene"
+  webar-scene="key: e611f68c-67ec-4837-8d3a-a4039ece2629"
+  xr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+  renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true; sortTransparentObjects: true; precision: high; logarithmicDepthBuffer: false;"
+  raycaster="objects: .clickable"
+  loading-screen="enabled: false"
+  cursor="fuse: false; rayOrigin: mouse"
+>
+  <!-- AR Camera -->
+  <a-camera webar-camera></a-camera>
+  <!-- <a-camera webar-camera look-controls="enabled: true" cursor="rayOrigin: mouse"></a-camera> -->
+
+  <!-- ============================================ -->
+  <!-- AR CONTENT STAGE                            -->
+  <!-- ============================================ -->
+  <!-- All AR content should be placed under webar-stage -->
+  <!-- <a-assets timeout="60000">
+                <a-asset-item id="yougo_model" src="assets/models/yougo_1.glb"></a-asset-item>
+            </a-assets> -->
+  <a-entity webar-stage>
+    <a-entity
+      webar-ux-control="stageCursorUX: false; userGestureRotation: false; userGestureScale: false"
+    >
+      <!-- Blue Cube -->
+      <!-- <a-box
+        position="0 0.5 -2"
+        rotation="0 45 0"
+        color="#4CC3D9"
+        shadow="cast: true; receive: true"
+      >
+      </a-box> -->
+
+      <a-entity
+        class="clickable"
+        [attr.gltf-model]="modelPath"
+        #ar_model
+        id="armodel"
+        rotation="0 0 0"
+        position="0 0.5 -2"
+        shadow="cast: true; receive: true"
+        scale="1.2 1.2 1.2"
+        draco-loader="decoderPath: https://www.gstatic.com/draco/v1/decoders/"
+        webar-loadmonitor="elType: glb"
+      >
+      </a-entity>
+    </a-entity>
+  </a-entity>
+
+  <!-- ============================================ -->
+  <!-- LIGHTING SETUP                             -->
+  <!-- ============================================ -->
+
+  <!-- Ambient Light -->
+  <a-entity light="type: ambient; color: #EEE; intensity: 2.1"> </a-entity>
+
+  <!-- Directional Light -->
+  <a-entity
+    light="type: directional; color: #FFF; intensity: 3.14; castShadow: false;"
+    position="-0.5 1 1"
+  >
+  </a-entity>
+</a-scene>
+
+<!-- ============================================ -->
+<!-- LOADING & PERMISSION UI                    -->
+<!-- ============================================ -->
+
+<!-- Loading Screen (enhanced by custom-handlers.js) -->
+<div id="loadingscreen" class="fullscreenflexcol showflex">
+  <div>Initializing WebAR SDK...</div>
+</div>
+
+<!-- Camera Permission Dialog -->
+<div id="camperms" class="permholder hide">
+  <div>📷 Camera Access Required</div>
+  <div>We need access to your camera for this AR experience to work.</div>
+  <div id="cambutton" class="permsbutton">Grant Access</div>
+</div>
+
+<!-- Motion Sensor Permission Dialog (iOS) -->
+<div id="gyroperms" class="permholder hide">
+  <div>📱 Motion Sensors Required</div>
+  <div>We need access to motion sensors for AR tracking to work properly.</div>
+  <div id="gyrobutton" class="permsbutton">Grant Access</div>
+</div>

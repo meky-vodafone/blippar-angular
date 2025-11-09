@@ -1,0 +1,110 @@
+.game-header {
+  position: fixed;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  z-index: 200;
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
+  border-radius: 24px;
+  border: 1px solid white;
+  padding: 12px;
+  width: 90%;
+  line-height: 1;
+  direction: ltr;
+  text-align: start;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  animation: springDown 1.2s ease-out;
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+
+  .top-section {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    .timer-container {
+      display: flex;
+      gap: 4px;
+      align-items: end;
+    }
+  }
+  .bottom-section {
+    .my-progress-bar {
+      width: 100%;
+      border: 3px solid red;
+      height: 28px;
+      border-radius: 6px;
+      background: white;
+      .my-progress {
+        width: 0%;
+        height: 100%;
+        background: repeating-linear-gradient(135deg, red, red 10px, white 9px, white 14px);
+        background-size: 40px 40px;
+        animation: moveStripes 3s linear infinite 1s;
+        transition: all 0.5s linear;
+      }
+    }
+  }
+
+  .icon-container {
+    position: absolute;
+    right: -1px;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    width: 55px;
+    img {
+      width: 100%;
+    }
+  }
+}
+@keyframes moveStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+
+@keyframes springDown {
+  0% {
+    transform: translate(-50%, -120%) scaleY(1.2);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, 10%) scaleY(0.9);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -5%) scaleY(1.05);
+  }
+  100% {
+    transform: translate(-50%, 0) scaleY(1);
+  }
+}
+// @keyframes fadeSlideDown {
+//   from {
+//     transform: translate(-50%, -40px);
+//     opacity: 0;
+//   }
+//   to {
+//     transform: translate(-50%, 0);
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes slideDown {
+//   from {
+//     transform: translate(-50%, -100%);
+//     opacity: 0;
+//   }
+//   to {
+//     transform: translate(-50%, 0);
+//     opacity: 1;
+//   }
+// }

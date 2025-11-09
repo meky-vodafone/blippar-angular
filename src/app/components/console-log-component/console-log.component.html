@@ -1,0 +1,26 @@
+<section id="logContainer">
+    <div class="controls">
+        @if (!showLog()) {
+        <button class="btn btn-sm btn-link-active m-0" (click)="showLog.set(true)">Show Log</button>
+        } @else {
+        <button class="btn btn-sm btn-link-active m-0" (click)="showLog.set(false)">Hide Log</button>
+        }
+        @for (type of logTypes(); track type) {
+        <label>
+            <input type="checkbox" [checked]="selectedTypes.includes(type)"
+                (change)="onTypeSelectionChange(type, $event.target.checked)">
+            {{ type }}
+        </label>
+        }
+    </div>
+
+    <div id="debugConsole" #logContainer [hidden]="!showLog()">
+        @for (log of filteredLogs; track log) {
+        <div [style.color]="log.color">
+            {{ log.message }}
+        </div>
+        }
+    </div>
+
+
+</section>
