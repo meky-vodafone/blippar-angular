@@ -69,6 +69,7 @@ export class ArGameIframe implements OnInit, OnDestroy {
 
     // Emit payload and unsubscribe so we only handle the first valid game-complete message
     this.gameComplete.emit(payload);
+    alert("Game Completed!" + JSON.stringify(payload));
     this.handledFirstMessage = true;
     try {
       window.removeEventListener('message', this.messageHandler, false);
