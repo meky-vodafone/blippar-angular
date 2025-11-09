@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ArGame {
-  time = 10;
+  time = 60;
   secondsLeft = signal(this.time);
   private intervalId?: ReturnType<typeof setInterval>;
   timerCompleted$ = new Subject<boolean>();
